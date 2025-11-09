@@ -17,8 +17,7 @@
 
     @include('components.footer')
 
-    <!-- Use bundle to include Popper -->
-    <script src="/bootstrap-5.0.2-dist/js/bootstrap.bundle.js"></script>
+    <script src="/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
 </body>
 
 </html>

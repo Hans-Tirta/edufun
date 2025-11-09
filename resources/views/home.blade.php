@@ -2,13 +2,10 @@
 @section('title', 'Home')
 
 @section('content')
-    {{-- HERO SECTION --}}
     <div class="mb-4">
         <img src="https://picsum.photos/seed/news-hero/1200/400" alt="Hero" class="img-fluid rounded w-100">
-
     </div>
 
-    {{-- LATEST POSTS --}}
     <h2 class="mb-3">Latest Posts</h2>
 
     @forelse($latest as $post)

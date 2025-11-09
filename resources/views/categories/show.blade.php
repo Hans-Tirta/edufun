@@ -6,16 +6,13 @@
 
     @forelse($posts as $post)
         <div class="row mb-4 p-3 border rounded align-items-center">
-            {{-- Gambar di kiri --}}
+            {{-- image left --}}
             <div class="col-md-4 mb-2 mb-md-0">
-                @if ($post->image)
-                    <img src="{{ $post->image }}" alt="cover {{ $post->title }}" class="img-fluid rounded w-100">
-                @else
-                    <img src="https://picsum.photos/seed/default/900/450" alt="default image" class="img-fluid rounded w-100">
-                @endif
+                <img src="{{ $post->image ?: 'https://picsum.photos/seed/default/900/450' }}" alt="cover {{ $post->title }}"
+                    class="img-fluid rounded w-100">
             </div>
 
-            {{-- Teks di kanan --}}
+            {{-- text right --}}
             <div class="col-md-8">
                 <h5 class="mb-1">{{ $post->title }}</h5>
                 <small class="text-muted">
