@@ -3,42 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class WriterController extends Controller
 {
-    protected array $writers = [
-        'budi' => [
-            'name' => 'Budi',
-            'specialty' => 'Interactive Multimedia',
-            'avatar' => 'https://picsum.photos/seed/budi/200',
-        ],
-        'siti' => [
-            'name' => 'Siti',
-            'specialty' => 'Software Engineering',
-            'avatar' => 'https://picsum.photos/seed/siti/200',
-        ],
-    ];
-
+    // List all users who have at least one post
     public function index()
     {
-        $writers = $this->writers;
+        // Grab users who have posts + count them
+        $writers = User::has('posts')
+            ->withCount('posts')
+            ->get();
+
         return view('writers.index', compact('writers'));
     }
 
-    public function show(string $slug)
+    // Show a writer profile and their posts
+    public function show(User $user)
     {
-        if (!isset($this->writers[$slug])) {
-            abort(404);
-        }
+        // Eager-load category to avoid N+1
+        $posts = $user->posts()->with('category')->latest('id')->get();
 
-        $writer = $this->writers[$slug];
-
-        $posts = Post::with('category')
-            ->where('author', $writer['name'])
-            ->latest('id')
-            ->get();
-
-        return view('writers.show', compact('writer', 'posts'));
+        return view('writers.show', [
+            'user'   => $user,
+            'posts'  => $posts,
+        ]);
     }
 }

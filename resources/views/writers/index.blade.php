@@ -6,16 +6,17 @@
 
     <div class="container">
         <div class="row g-4">
-            @foreach ($writers as $slug => $w)
+            @foreach ($writers as $writer)
                 <div class="col-md-6">
-                    <a href="{{ route('writers.show', $slug) }}" class="text-decoration-none text-dark">
-                        <div class="card h-100 text-center border-0 shadow-sm p-4 transition hover-shadow">
-                            <img src="{{ $w['avatar'] }}" alt="{{ $w['name'] }}" class="rounded-circle mx-auto mb-3"
+                    <a href="{{ route('writers.show', $writer->id) }}" class="text-decoration-none text-dark">
+                        <div class="card h-100 text-center border-0 shadow-sm p-4">
+                            <img src="{{ $writer->avatar }}" alt="{{ $writer->name }}" class="rounded-circle mx-auto mb-3"
                                 width="120" height="120">
-                            <h5 class="mb-1">{{ $w['name'] }}</h5>
+                            <h5 class="mb-1">{{ $writer->name }}</h5>
                             <small class="text-muted d-block mb-3">
-                                Specialist: {{ $w['specialty'] }}
+                                Specialist: {{ $writer->specialty ?? '—' }} • Articles: {{ $writer->posts_count }}
                             </small>
+                            <span class="btn btn-sm btn-primary px-3">View Posts</span>
                         </div>
                     </a>
                 </div>

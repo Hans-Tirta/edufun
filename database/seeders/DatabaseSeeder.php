@@ -19,57 +19,59 @@ class DatabaseSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        // Kategori
+        // --- Create categories ---
         $interactive = Category::firstOrCreate(['name' => 'Interactive Multimedia']);
-        $software = Category::firstOrCreate(['name' => 'Software Engineering']);
+        $software    = Category::firstOrCreate(['name' => 'Software Engineering']);
 
-        // Penulis
-        $writers = [
-            'budi' => [
-                'name' => 'Budi',
-                'specialty' => 'Interactive Multimedia',
-                'avatar' => 'https://picsum.photos/seed/budi/200',
-            ],
-            'siti' => [
-                'name' => 'Siti',
-                'specialty' => 'Software Engineering',
-                'avatar' => 'https://picsum.photos/seed/siti/200',
-            ],
-        ];
+        // --- Create users with specific specialties ---
+        $interactiveWriters = User::factory()->count(2)->create([
+            'specialty' => 'Interactive Multimedia',
+        ]);
 
-        // Materi per kategori
-        $imTopics = [
+        $softwareWriters = User::factory()->count(2)->create([
+            'specialty' => 'Software Engineering',
+        ]);
+
+        // --- Interactive Multimedia topics (assigned to Interactive Multimedia specialists) ---
+        $interactiveTopics = [
             'Human and Computer Interaction',
             'User Experience',
             'User Experience for Digital Immersive Technology',
         ];
 
-        $seTopics = [
+        foreach ($interactiveTopics as $topic) {
+            $seed = Str::slug($topic, '-');
+
+            Post::create([
+                'category_id' => $interactive->id,
+                'user_id'     => $interactiveWriters->random()->id,
+                'title'       => $topic,
+                'image'       => "https://picsum.photos/seed/{$seed}/900/450",
+                'body'        => $faker->paragraphs(6, true),
+                'created_at'  => $faker->dateTimeBetween('-30 days', 'now'),
+                'updated_at'  => now(),
+            ]);
+        }
+
+        // --- Software Engineering topics (assigned to Software Engineering specialists) ---
+        $softwareTopics = [
             'Pattern Software Design',
             'Agile Software Development',
             'Code Reengineering',
         ];
 
-        // Membuat post dari topik tertentu
-        $makePost = function ($categoryId, string $topic, string $authorName) use ($faker) {
+        foreach ($softwareTopics as $topic) {
             $seed = Str::slug($topic, '-');
+
             Post::create([
-                'category_id' => $categoryId,
-                'title' => $topic,
-                'author' => $authorName,
-                'image' => "https://picsum.photos/seed/{$seed}/1920/1080",
-                'body' => $faker->paragraphs(6, true),
-                'created_at' => $faker->dateTimeBetween('-30 days', 'now'),
-                'updated_at' => now(),
+                'category_id' => $software->id,
+                'user_id'     => $softwareWriters->random()->id,
+                'title'       => $topic,
+                'image'       => "https://picsum.photos/seed/{$seed}/900/450",
+                'body'        => $faker->paragraphs(6, true),
+                'created_at'  => $faker->dateTimeBetween('-30 days', 'now'),
+                'updated_at'  => now(),
             ]);
-        };
-
-        foreach ($imTopics as $t) {
-            $makePost($interactive->id, $t, $writers['budi']['name']);
-        }
-
-        foreach ($seTopics as $t) {
-            $makePost($software->id, $t, $writers['siti']['name']);
         }
     }
 }

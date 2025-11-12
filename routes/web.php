@@ -14,6 +14,6 @@ Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')
 Route::get('/categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
 
 Route::get('/writers', [WriterController::class, 'index'])->name('writers.index');
-Route::get('/writers/{slug}', [WriterController::class, 'show'])->name('writers.show');
+Route::get('/writers/{user}', [WriterController::class, 'show'])->name('writers.show');
 
 Route::view('/about', 'about')->name('about');
