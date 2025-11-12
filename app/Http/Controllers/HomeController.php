@@ -9,12 +9,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $latest = Post::with('category')
+        $latest = Post::with(['category', 'user'])
             ->latest('id')
             ->take(3)
             ->get();
-
-        // return response()->json($latest);
 
         return view('home', compact('latest'));
     }

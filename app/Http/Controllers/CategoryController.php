@@ -9,7 +9,7 @@ class CategoryController extends Controller
 {
     public function show(Category $category)
     {
-        $posts = $category->posts()->latest('id')->get();
+        $posts = $category->posts()->with('user')->latest('id')->get();
         return view('categories.show', compact('category', 'posts'));
     }
 }
