@@ -19,11 +19,9 @@ class DatabaseSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        // --- Create categories ---
         $interactive = Category::firstOrCreate(['name' => 'Interactive Multimedia']);
         $software    = Category::firstOrCreate(['name' => 'Software Engineering']);
 
-        // --- Create users with specific specialties ---
         $interactiveWriters = User::factory()->count(2)->create([
             'specialty' => 'Interactive Multimedia',
         ]);
@@ -32,7 +30,6 @@ class DatabaseSeeder extends Seeder
             'specialty' => 'Software Engineering',
         ]);
 
-        // --- Interactive Multimedia topics (assigned to Interactive Multimedia specialists) ---
         $interactiveTopics = [
             'Human and Computer Interaction',
             'User Experience',
@@ -53,7 +50,6 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // --- Software Engineering topics (assigned to Software Engineering specialists) ---
         $softwareTopics = [
             'Pattern Software Design',
             'Agile Software Development',

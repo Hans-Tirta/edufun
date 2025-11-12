@@ -4,7 +4,7 @@
 @section('content')
     <h1>{{ $post->title }}</h1>
     <p class="text-muted">
-        {{ $post->category->name }} | by {{ $post->author }} | {{ $post->created_at->toFormattedDateString() }}
+        {{ $post->category->name }} | by {{ $post->user->name }} | {{ $post->created_at->toFormattedDateString() }}
     </p>
 
     @if ($post->image)

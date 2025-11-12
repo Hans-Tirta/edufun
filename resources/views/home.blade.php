@@ -20,7 +20,8 @@
             <div class="col-md-8">
                 <h5 class="mb-1">{{ $post->title }}</h5>
                 <small class="text-muted">
-                    {{ $post->category->name }} | by {{ $post->author }} | {{ $post->created_at->toFormattedDateString() }}
+                    {{ $post->category->name }} | by {{ $post->user->name }} |
+                    {{ $post->created_at->toFormattedDateString() }}
                 </small>
                 <p class="mt-2 mb-3">
                     {{ Str::limit(strip_tags($post->body), 180) }}

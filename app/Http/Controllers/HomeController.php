@@ -14,6 +14,8 @@ class HomeController extends Controller
             ->take(3)
             ->get();
 
+        // return response()->json($latest);
+
         return view('home', compact('latest'));
     }
 }

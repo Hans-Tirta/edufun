@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class WriterController extends Controller
 {
@@ -27,8 +25,8 @@ class WriterController extends Controller
         $posts = $user->posts()->with('category')->latest('id')->get();
 
         return view('writers.show', [
-            'user'   => $user,
-            'posts'  => $posts,
+            'user' => $user,
+            'posts' => $posts,
         ]);
     }
 }

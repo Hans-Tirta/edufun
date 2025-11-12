@@ -14,7 +14,7 @@
                                 width="120" height="120">
                             <h5 class="mb-1">{{ $writer->name }}</h5>
                             <small class="text-muted d-block mb-3">
-                                Specialist: {{ $writer->specialty ?? '—' }} • Articles: {{ $writer->posts_count }}
+                                Specialist: {{ $writer->specialty ?? '—' }} | Articles: {{ $writer->posts_count }}
                             </small>
                             <span class="btn btn-sm btn-primary px-3">View Posts</span>
                         </div>
