@@ -23,18 +23,13 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $name = fake()->name();
-
         return [
-            'name' => $name,
+            'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-            'specialty' => fake()->randomElement([
-                'Interactive Multimedia',
-                'Software Engineering',
-            ]),
-            'avatar' => 'https://picsum.photos/seed/' . Str::slug($name) . '/150',
+            'specialty' => null,
+            'avatar' => 'https://picsum.photos/seed/' . rand(1, 1000) . '/150',
             'remember_token' => Str::random(10),
         ];
     }

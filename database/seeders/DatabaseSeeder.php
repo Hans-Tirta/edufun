@@ -8,7 +8,6 @@ use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -37,13 +36,11 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($interactiveTopics as $topic) {
-            $seed = Str::slug($topic, '-');
-
             Post::create([
                 'category_id' => $interactive->id,
                 'user_id'     => $interactiveWriters->random()->id,
                 'title'       => $topic,
-                'image'       => "https://picsum.photos/seed/{$seed}/900/450",
+                'image'       => "https://picsum.photos/seed/" . rand(1, 1000) . "/900/450",
                 'body'        => $faker->paragraphs(6, true),
                 'created_at'  => $faker->dateTimeBetween('-30 days', 'now'),
                 'updated_at'  => now(),
@@ -57,13 +54,11 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($softwareTopics as $topic) {
-            $seed = Str::slug($topic, '-');
-
             Post::create([
                 'category_id' => $software->id,
                 'user_id'     => $softwareWriters->random()->id,
                 'title'       => $topic,
-                'image'       => "https://picsum.photos/seed/{$seed}/900/450",
+                'image'       => "https://picsum.photos/seed/" . rand(1, 1000) . "/900/450",
                 'body'        => $faker->paragraphs(6, true),
                 'created_at'  => $faker->dateTimeBetween('-30 days', 'now'),
                 'updated_at'  => now(),
