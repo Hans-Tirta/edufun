@@ -24,9 +24,6 @@ class WriterController extends Controller
         // Eager-load category to avoid N+1
         $posts = $user->posts()->with('category')->latest('id')->get();
 
-        return view('writers.show', [
-            'user' => $user,
-            'posts' => $posts,
-        ]);
+        return view('writers.show', compact('user', 'posts'));
     }
 }

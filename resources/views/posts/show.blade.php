@@ -7,9 +7,7 @@
         {{ $post->category->name }} | by {{ $post->user->name }} | {{ $post->created_at->toFormattedDateString() }}
     </p>
 
-    @if ($post->image)
-        <img src="{{ $post->image }}" alt="cover {{ $post->title }}" class="img-fluid rounded mb-3">
-    @endif
+    <img src="{{ $post->image }}" alt="{{ $post->title }}" class="img-fluid rounded mb-3">
 
     <hr>
     <article class="fs-6">{{ $post->body }}</article>
